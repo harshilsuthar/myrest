@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+
+    <body>
+        <div id="root"></div>
+        <a class="btn btn-success" onclick="postdata()" href="#">Post Data</a>
+        <a class="btn btn-success" onclick="getall()" href="#">Get All Data</a>
+    </body>
+    <script>
+        function postdata(){
+        var name = "";
+        $.ajax({
+            url: 'http://127.0.0.1:8000/users/',
+            method: 'post',
+            data: {
+                "username":"happy2",
+                "password":"okok",
+                "email":"ok@ok.com"
+            },
+            success: function (data) {
+                console.log(data);
+                nmae = data.username;
+                $('#root').text(name);
+            }
+        });
+    }
+    function getall(){
+        var name = "";
+        $.ajax({
+            url: 'http://127.0.0.1:8000/users/',
+            method: 'get',
+            success: function (data) {
+                console.log(data);
+                
+                for(let i of data){
+                    name += ' ' + i.username;
+                };
+                console.log('ok',i);
+                $('#root').text(name);
+            }
+        });
+    }
+    </script>
+
+</html>
